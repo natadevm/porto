@@ -33,14 +33,14 @@ const Contact = () => {
       icon: <Email />,
       primary: 'Email',
       secondary: 'codernathailu@gmail.com',
-      link: 'mailto:codernathailu@gmail.com',
+      link: 'mailto:natanaelhailu2809@gmail.com',
       color: '#D44638',
     },
     {
       icon: <Phone />,
       primary: 'Phone',
       secondary: '+251 961 163 093',
-      link: 'tel:+251961163093',
+      link: 'tel:+251980118769',
       color: '#25D366',
     },
     {
