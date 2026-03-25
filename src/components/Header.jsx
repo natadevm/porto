@@ -149,7 +149,7 @@ const Header = () => {
                 Natnael Hailu
               </Typography>
               <Chip
-                label="MERN Developer"
+                label="MERN  AND ERP Developer"
                 size="small"
                 sx={{
                   backgroundColor: 'primary.main',
