@@ -22,6 +22,7 @@ import {
   Api,
   Web,
   Star,
+  Business,
 } from "@mui/icons-material";
 
 const Home = () => {
@@ -56,6 +57,13 @@ const Home = () => {
       description: "End-to-end web application development",
       color: "#764ABC",
       features: ["MERN Stack", "Redux", "JWT Auth"],
+    },
+    {
+      icon: <Business />,
+      title: "ERP Development",
+      description: "Building scalable ERP systems tailored to business needs",
+      color: "#880000",
+      features: ["frappe", "ERPnext", "jinja", "reactjs"],
     },
   ];
 

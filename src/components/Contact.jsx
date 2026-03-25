@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   Container,
@@ -7,379 +7,182 @@ import {
   Paper,
   List,
   ListItem,
-  ListItemIcon,
-  ListItemText,
-  useTheme,
-  Button,
   Avatar,
-  Chip,
-} from '@mui/material';
-import {
-  Email,
-  Phone,
-  GitHub,
-  LinkedIn,
-  Send,
-  LocationOn,
-  Work,
-} from '@mui/icons-material';
+  Button,
+  useTheme,
+} from "@mui/material";
+import { Email, Phone, GitHub, LinkedIn, Send } from "@mui/icons-material";
 
 const Contact = () => {
   const theme = useTheme();
-  const isDark = theme.palette.mode === 'dark';
+  const isDark = theme.palette.mode === "dark";
 
-  const contactInfo = [
+  const personalContacts = [
     {
       icon: <Email />,
-      primary: 'Email',
-      secondary: 'natanelhailu2809@gmail.com',
-      link: 'mailto:natanelhailu2809@gmail.com',
-      color: '#D44638',
+      title: "Email",
+      value: "natanelhailu2809@gmail.com",
+      link: "mailto:natanelhailu2809@gmail.com",
+      color: "#D44638",
     },
     {
       icon: <Phone />,
-      primary: 'Phone',
-      secondary: '+251980118769',
-      link: 'tel:+251980118769',
-      color: '#25D366',
+      title: "Phone",
+      value: "+251980118769",
+      link: "tel:+251980118769",
+      color: "#25D366",
+    },
+  ];
+
+  const githubAccounts = [
+    {
+      icon: <GitHub />,
+      title: "GitHub (Main)",
+      value: "github.com/natabile",
+      link: "https://github.com/natabile",
+      color: "#333333",
     },
     {
       icon: <GitHub />,
-      primary: 'GitHub',
-      secondary: 'github.com/natabile',
-      link: 'https://github.com/natabile',
-      color: '#333333',
-    }
+      title: "GitHub (Secondary)",
+      value: "github.com/natadevm",
+      link: "https://github.com/natadevm",
+      color: "#333333",
+    },
   ];
 
-  const availability = [
+  const linkedInProfile = [
     {
-      icon: <Work />,
-      title: 'Freelance',
-      status: 'Available',
-      description: 'Open to project-based work',
-    },
-    {
-      icon: <Work />,
-      title: 'Full-time',
-      status: 'Available',
-      description: 'Looking for new opportunities',
-    },
-    {
-      icon: <Work />,
-      title: 'Collaboration',
-      status: 'Open',
-      description: 'Excited to work with teams',
+      icon: <LinkedIn />,
+      title: "LinkedIn",
+      value: "linkedin.com/in/natnael-hailu",
+      link: "https://www.linkedin.com/in/natnael-hailu-b60438376/",
+      color: "#0A66C2",
     },
   ];
+
+  const renderList = (list) =>
+    list.map((info, idx) => (
+      <ListItem
+        key={idx}
+        component="a"
+        href={info.link}
+        target="_blank"
+        sx={{
+          textDecoration: "none",
+          borderRadius: 2,
+          mb: 1,
+          p: 2,
+          bgcolor: isDark ? "#1e1e1e" : "#e3f2fd",
+          transition: "0.3s",
+          "&:hover": { transform: "translateX(5px)", boxShadow: 2 },
+          display: "flex",
+          alignItems: "center",
+          gap: 2,
+        }}
+      >
+        <Avatar sx={{ bgcolor: info.color }}>{info.icon}</Avatar>
+        <Box>
+          <Typography fontWeight={600}>{info.title}</Typography>
+          <Typography color="text.secondary">{info.value}</Typography>
+        </Box>
+      </ListItem>
+    ));
 
   return (
     <Box
       id="contact"
       sx={{
-        py: 10,
-        background: isDark 
-          ? 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%)'
-          : 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%)',
-        position: 'relative',
-        overflow: 'hidden',
+        py: 12,
+        background: isDark ? "#121212" : "#f5f5f5",
       }}
     >
-      {/* Background Pattern */}
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundImage: isDark
-            ? 'radial-gradient(circle at 20% 80%, rgba(25, 118, 210, 0.05) 0%, transparent 50%)'
-            : 'radial-gradient(circle at 80% 20%, rgba(25, 118, 210, 0.05) 0%, transparent 50%)',
-          zIndex: 1,
-        }}
-      />
-
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
-        <Box sx={{ textAlign: 'center', mb: 8 }}>
-          <Typography
-            variant="h2"
-            sx={{
-              fontWeight: 700,
-              mb: 3,
-              background: 'linear-gradient(45deg, #1976d2, #42a5f5)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              fontSize: { xs: '2.5rem', md: '3.5rem' },
-            }}
-          >
+      <Container maxWidth="lg">
+        {/* Header */}
+        <Box sx={{ textAlign: "center", mb: 8 }}>
+          <Typography variant="h3" sx={{ fontWeight: 700, mb: 2 }}>
             Get In Touch
           </Typography>
-          <Typography
-            variant="h6"
-            sx={{
-              color: 'text.secondary',
-              maxWidth: '700px',
-              mx: 'auto',
-              lineHeight: 1.8,
-              fontSize: { xs: '1rem', md: '1.1rem' },
-            }}
-          >
-            I'm always interested in new opportunities and exciting projects. 
-            Feel free to reach out if you'd like to work together!
+          <Typography variant="subtitle1" color="text.secondary">
+            I’m always open to new opportunities and exciting projects. Reach
+            out if you’d like to work together!
           </Typography>
         </Box>
 
         <Grid container spacing={4}>
-          {/* Contact Information */}
-          <Grid item xs={12} lg={6}>
+          {/* Card 1: Personal Contacts */}
+          <Grid item xs={12} md={4}>
             <Paper
-              elevation={isDark ? 3 : 6}
+              elevation={3}
               sx={{
                 p: 4,
-                height: '100%',
-                background: isDark 
-                  ? 'linear-gradient(145deg, #1e1e1e, #2a2a2a)'
-                  : 'linear-gradient(145deg, #ffffff, #f8f9fa)',
-                border: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.05)',
                 borderRadius: 3,
-                transition: 'all 0.3s ease-in-out',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: isDark ? 8 : 12,
-                },
+                display: "flex",
+                flexDirection: "column",
+                gap: 3,
               }}
             >
-              <Typography
-                variant="h4"
-                sx={{
-                  fontWeight: 700,
-                  mb: 4,
-                  color: 'text.primary',
-                  textAlign: 'center',
-                  background: 'linear-gradient(45deg, #1976d2, #42a5f5)',
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-              >
-                Contact Information
+              <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
+                Contact Info
               </Typography>
-              
-              <List sx={{ pt: 0 }}>
-                {contactInfo.map((info, index) => (
-                  <ListItem
-                    key={index}
-                    component="a"
-                    href={info.link}
-                    target={info.link.startsWith('http') ? '_blank' : undefined}
-                    sx={{
-                      textDecoration: 'none',
-                      color: 'text.primary',
-                      mb: 2,
-                      p: 3,
-                      borderRadius: 3,
-                      background: isDark 
-                        ? 'rgba(255,255,255,0.05)' 
-                        : 'rgba(25, 118, 210, 0.05)',
-                      border: isDark 
-                        ? '1px solid rgba(255,255,255,0.1)' 
-                        : '1px solid rgba(25, 118, 210, 0.1)',
-                      transition: 'all 0.3s ease-in-out',
-                      cursor: 'pointer',
-                      '&:hover': {
-                        background: isDark 
-                          ? 'rgba(255,255,255,0.1)' 
-                          : 'rgba(25, 118, 210, 0.1)',
-                        transform: 'translateX(8px) scale(1.02)',
-                        boxShadow: 4,
-                      },
-                    }}
-                  >
-                    <Avatar
-                      sx={{
-                        backgroundColor: info.color,
-                        color: 'white',
-                        mr: 2,
-                        width: 48,
-                        height: 48,
-                        boxShadow: `0 4px 16px ${info.color}40`,
-                      }}
-                    >
-                      {info.icon}
-                    </Avatar>
-                    <ListItemText
-                      primary={info.primary}
-                      secondary={info.secondary}
-                      primaryTypographyProps={{
-                        fontWeight: 600,
-                        fontSize: '1.1rem',
-                        color: 'text.primary',
-                      }}
-                      secondaryTypographyProps={{
-                        color: 'text.secondary',
-                        fontSize: '1rem',
-                      }}
-                    />
-                  </ListItem>
-                ))}
-              </List>
+              {renderList(personalContacts)}
             </Paper>
           </Grid>
 
-          {/* Availability & Call to Action */}
-          <Grid item xs={12} lg={6}>
+          {/* Card 2: GitHub Accounts */}
+          <Grid item xs={12} md={4}>
             <Paper
-              elevation={isDark ? 3 : 6}
+              elevation={3}
               sx={{
                 p: 4,
-                height: '100%',
-                background: 'linear-gradient(135deg, #1976d2, #42a5f5)',
-                color: 'white',
                 borderRadius: 3,
-                transition: 'all 0.3s ease-in-out',
-                '&:hover': {
-                  transform: 'translateY(-4px)',
-                  boxShadow: '0 16px 48px rgba(25, 118, 210, 0.3)',
-                },
+                display: "flex",
+                flexDirection: "column",
+                gap: 3,
               }}
             >
-              <Typography
-                variant="h4"
-                sx={{
-                  fontWeight: 700,
-                  mb: 4,
-                  color: 'white',
-                  textAlign: 'center',
-                }}
-              >
-                Let's Work Together
+              <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
+                GitHub Accounts
               </Typography>
+              {renderList(githubAccounts)}
+            </Paper>
+          </Grid>
 
-              <Box sx={{ mb: 4 }}>
-                <Typography
-                  variant="h6"
-                  sx={{
-                    fontWeight: 600,
-                    mb: 3,
-                    color: 'white',
-                    textAlign: 'center',
-                  }}
-                >
-                  Current Availability
-                </Typography>
-                
-                <Grid container spacing={2}>
-                  {availability.map((item, index) => (
-                    <Grid item xs={12} sm={4} key={index}>
-                      <Box
-                        sx={{
-                          p: 2,
-                          borderRadius: 2,
-                          background: 'rgba(255,255,255,0.1)',
-                          textAlign: 'center',
-                          transition: 'all 0.3s ease-in-out',
-                          '&:hover': {
-                            background: 'rgba(255,255,255,0.2)',
-                            transform: 'translateY(-2px)',
-                          },
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            width: 48,
-                            height: 48,
-                            borderRadius: '50%',
-                            background: 'rgba(255,255,255,0.2)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            mx: 'auto',
-                            mb: 1,
-                            fontSize: '1.5rem',
-                          }}
-                        >
-                          {item.icon}
-                        </Box>
-                        <Typography
-                          variant="subtitle1"
-                          sx={{
-                            fontWeight: 600,
-                            mb: 0.5,
-                            color: 'white',
-                          }}
-                        >
-                          {item.title}
-                        </Typography>
-                        <Chip
-                          label={item.status}
-                          size="small"
-                          sx={{
-                            backgroundColor: '#4CAF50',
-                            color: 'white',
-                            fontWeight: 600,
-                            mb: 1,
-                          }}
-                        />
-                        <Typography
-                          variant="caption"
-                          sx={{
-                            color: 'rgba(255,255,255,0.8)',
-                            display: 'block',
-                          }}
-                        >
-                          {item.description}
-                        </Typography>
-                      </Box>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Box>
-
-              <Box sx={{ textAlign: 'center' }}>
-                <Typography
-                  variant="body1"
-                  sx={{
-                    color: 'rgba(255,255,255,0.9)',
-                    lineHeight: 1.6,
-                    mb: 3,
-                  }}
-                >
-                  I'm available for freelance work, full-time positions, and exciting collaborations. 
-                  Don't hesitate to reach out!
-                </Typography>
-                
-                <Button
-                  variant="contained"
-                  size="large"
-                  startIcon={<Send />}
-                  href="mailto:codernathailu@gmail.com"
-                  sx={{
-                    backgroundColor: 'white',
-                    color: 'primary.main',
-                    px: 4,
-                    py: 1.5,
-                    fontWeight: 600,
-                    borderRadius: 3,
-                    boxShadow: '0 8px 32px rgba(255,255,255,0.3)',
-                    '&:hover': {
-                      backgroundColor: 'rgba(255,255,255,0.9)',
-                      transform: 'translateY(-2px)',
-                      boxShadow: '0 12px 40px rgba(255,255,255,0.4)',
-                    },
-                    transition: 'all 0.3s ease-in-out',
-                  }}
-                >
-                  Send Message
-                </Button>
-              </Box>
+          {/* Card 3: LinkedIn */}
+          <Grid item xs={12} md={4}>
+            <Paper
+              elevation={3}
+              sx={{
+                p: 4,
+                borderRadius: 3,
+                display: "flex",
+                flexDirection: "column",
+                gap: 3,
+              }}
+            >
+              <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
+                LinkedIn
+              </Typography>
+              {renderList(linkedInProfile)}
             </Paper>
           </Grid>
         </Grid>
+
+        {/* CTA Button */}
+        <Box sx={{ textAlign: "center", mt: 6 }}>
+          <Button
+            variant="contained"
+            color={isDark ? "primary" : "secondary"}
+            size="large"
+            startIcon={<Send />}
+            href="mailto:codernathailu@gmail.com"
+          >
+            Send Message
+          </Button>
+        </Box>
       </Container>
     </Box>
   );
 };
 
-export default Contact; 
+export default Contact;
