@@ -18,8 +18,8 @@ const Projects = () => {
     {
       title: "FMS  Personal Finance Management",
       description: `FMS is  personal finance management platform designed to help users track income, expenses, and savings effortlessly. 
-    It provides visually appealing dashboards with interactive charts, budget planning tools, and real-time tracking of crypto and stock prices. 
-    Users can categorize transactions, set financial goals, and receive automated insights to improve spending habits. The platform is responsive, secure, and built with scalability in mind, making it ideal for both casual users and finance enthusiasts.`,
+    
+    Users can categorize transactions, set financial goals. The platform is responsive, secure, and built with scalability in mind, making it ideal for both casual users and finance enthusiasts.`,
       github: "https://github.com/natabile/FMs",
       image:
         "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
@@ -29,7 +29,7 @@ const Projects = () => {
     {
       title: "Endebet – Home Rental Platform",
       description: `Endebet is a modern home rental platform designed to simplify property searching and rental management. 
-    Users can browse listings with detailed photos, descriptions, and reviews. The platform offers advanced map-based search functionality, real-time chat with property owners, booking management, and secure payment integration. 
+    Users can browse listings with detailed photos, descriptions, and reviews. The platform offers map, real-time chat with property owners, booking management. 
     It is built for scalability and user engagement, ensuring a seamless experience for renters, landlords, and agencies alike. The platform also supports notifications, wishlists, and analytics to enhance decision-making.`,
       github: "https://github.com/natabile/home",
       image:
