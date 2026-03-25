@@ -193,7 +193,7 @@ const Home = () => {
                   animation: "slideInLeft 1s ease-out 0.2s both",
                 }}
               >
-                MERN Stack Developer and erp Developer
+                MERN Stack Developer and ERP Developer
               </Typography>
               {/* Experience Badge */}
               <Box
