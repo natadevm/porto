@@ -1,218 +1,182 @@
 import React from "react";
-import {
-  Box,
-  Container,
-  Typography,
-  Paper,
-  Card,
-  CardContent,
-} from "@mui/material";
-
-import {
-  Code,
-  Storage,
-  Api,
-  Web,
-  DataObject,
-  Schema,
-  Business,
-} from "@mui/icons-material";
+import { Box, Container, Typography, useTheme } from "@mui/material";
+import { Code, Storage, Api, Web, Business, Layers } from "@mui/icons-material";
+import { motion } from "framer-motion";
 
 const Skills = () => {
-  const skills = [
-    {
-      name: "React.js",
-      icon: <Web />,
-      color: "#61DAFB",
-      description: "Frontend development with React hooks and components",
-    },
-    {
-      name: "Redux",
-      icon: <DataObject />,
-      color: "#764ABC",
-      description: "State management and predictable state container",
-    },
-    {
-      name: "Node.js",
-      icon: <Code />,
-      color: "#339933",
-      description: "Server-side JavaScript runtime environment",
-    },
-    {
-      name: "Express.js",
-      icon: <Api />,
-      color: "#000000",
-      description: "Web application framework for Node.js",
-    },
-    {
-      name: "MongoDB",
-      icon: <Storage />,
-      color: "#47A248",
-      description: "NoSQL database for scalable applications",
-    },
-    {
-      name: "Mongoose",
-      icon: <Schema />,
-      color: "#880000",
-      description: "MongoDB object modeling for Node.js",
-    },
-    {
-      name: "Material-UI",
-      icon: <Web />,
-      color: "#1976d2",
-      description: "React UI framework for building beautiful interfaces",
-    },
-    {
-      name: "Frappe ERP",
-      icon: <Business />,
-      color: "#2a9d8f",
-      description:
-        "ERP development using Frappe framework for business solutions",
-    },
-    {
-      name: "ERPNext",
-      icon: <Business />,
-      color: "#264653",
-      description: "Open-source ERP system implementation and customization",
-    },
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+
+  const coreSkills = [
+    { name: "React.js", icon: <Web />, color: "#61DAFB", desc: "Frontend UI components & hooks" },
+    { name: "Node.js", icon: <Code />, color: "#339933", desc: "Server-side runtime" },
+    { name: "Express.js", icon: <Api />, color: "#F97316", desc: "RESTful API framework" },
+    { name: "MongoDB", icon: <Storage />, color: "#47A248", desc: "NoSQL database solutions" },
+    { name: "Frappe/ERPNext", icon: <Business />, color: "#E11D48", desc: "Enterprise ERP systems" },
+    { name: "Material-UI", icon: <Layers />, color: "#3b82f6", desc: "Design system & components" },
   ];
 
-  const additionalSkills = [
-    { name: "JavaScript (ES6+)", category: "Language", icon: "⚡" },
-    { name: "HTML5 & CSS3", category: "Frontend", icon: "🎨" },
-    { name: "Git & GitHub", category: "Tools", icon: "📚" },
-    { name: "RESTful APIs", category: "Backend", icon: "🔌" },
-    { name: "JWT Authentication", category: "Security", icon: "🔐" },
-    { name: "Responsive Design", category: "Frontend", icon: "📱" },
-    { name: "Agile Methodology", category: "Process", icon: "🔄" },
-    { name: "Postman", category: "Tools", icon: "📮" },
-    { name: "VS Code", category: "Tools", icon: "💻" },
-    { name: "Python", category: "Language", icon: "🐍" },
-    { name: "MariaDB/MySQL", category: "Database", icon: "🗄️" },
-    { name: "ERP Customization", category: "ERP", icon: "⚙️" },
-    { name: "Workflow Automation", category: "ERP", icon: "🔄" },
-    { name: "Business Process Mapping", category: "ERP", icon: "📊" },
+  const tools = [
+    "JavaScript ES6+", "TypeScript", "Redux", "HTML5 & CSS3",
+    "Python", "Jinja", "Mongoose", "JWT Auth",
+    "Git & GitHub", "RESTful APIs", "Responsive Design",
+    "Agile", "Postman", "MariaDB", "Docker", "VS Code",
   ];
 
   return (
-    <Box sx={{ py: 10 }}>
+    <Box id="skills" sx={{ py: 15, bgcolor: "background.default", position: "relative", overflow: "hidden" }}>
+      {/* Accent line */}
+      <Box sx={{
+        position: "absolute",
+        top: 0,
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "1px",
+        height: "80px",
+        background: `linear-gradient(to bottom, transparent, ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'})`,
+      }} />
+
       <Container maxWidth="lg">
-        <Box sx={{ textAlign: "center", mb: 8 }}>
-          <Typography variant="h3" fontWeight={700}>
-            Skills & Technologies
-          </Typography>
-        </Box>
-
-        <Box
-          sx={{
-            display: "grid",
-            gap: 3,
-            maxWidth: 1000,
-            mx: "auto",
-            gridTemplateColumns: {
-              xs: "repeat(1, 1fr)", // 1 column on very small screens
-              sm: "repeat(2, 1fr)", // 2 columns on small screens
-              md: "repeat(3, 1fr)", // 3 columns on medium and larger screens
-            },
-          }}
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
         >
-          {skills.map((skill, index) => (
-            <Card
-              key={index}
-              sx={{
-                aspectRatio: "1 / 1",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: 3,
-                textAlign: "center",
-                p: 2,
-                transition: "0.3s",
-                "&:hover": {
-                  transform: "translateY(-6px)",
-                  boxShadow: 6,
-                },
-              }}
+          <Box sx={{ textAlign: "center", mb: 10 }}>
+            <Typography
+              variant="overline"
+              sx={{ color: "primary.main", fontWeight: 700, letterSpacing: 3, display: "block", mb: 1 }}
             >
-              <CardContent>
-                {/* ICON */}
-                <Box
-                  sx={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: 2,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    background: skill.color,
-                    color: "#fff",
-                    mx: "auto",
-                    mb: 2,
-                  }}
-                >
-                  {skill.icon}
-                </Box>
+              Skills & Tools
+            </Typography>
+            <Typography variant="h2" fontWeight={800} color="text.primary">
+              My Tech Stack
+            </Typography>
+          </Box>
+        </motion.div>
 
-                {/* NAME */}
-                <Typography fontWeight={700} mb={1}>
-                  {skill.name}
-                </Typography>
-
-                {/* DESCRIPTION */}
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{
-                    fontSize: "0.85rem",
-                    lineHeight: 1.5,
-                  }}
-                >
-                  {skill.description}
-                </Typography>
-              </CardContent>
-            </Card>
-          ))}
-        </Box>
-
-        {/* ADDITIONAL SKILLS */}
-        <Box sx={{ mt: 10 }}>
-          <Typography variant="h5" mb={3}>
-            Additional Skills
-          </Typography>
-
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
-              gap: 2,
-            }}
-          >
-            {additionalSkills.map((skill, index) => (
-              <Paper
-                key={index}
+        {/* Core Skills — Large Cards */}
+        <Box sx={{
+          display: "grid",
+          gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "repeat(3, 1fr)" },
+          gap: 3,
+          mb: 12,
+        }}>
+          {coreSkills.map((skill, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+            >
+              <Box
+                component={motion.div}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
                 sx={{
-                  p: 2,
-                  textAlign: "center",
-                  borderRadius: 2,
-                  transition: "0.2s",
+                  p: 4,
+                  borderRadius: "20px",
+                  border: "1px solid",
+                  borderColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
+                  bgcolor: isDark ? "rgba(30,41,59,0.3)" : "rgba(255,255,255,0.6)",
+                  backdropFilter: "blur(10px)",
+                  transition: "all 0.3s ease",
+                  cursor: "default",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: 3,
                   "&:hover": {
-                    transform: "translateY(-3px)",
-                    boxShadow: 3,
+                    borderColor: `${skill.color}40`,
+                    boxShadow: `0 20px 40px ${skill.color}10`,
                   },
                 }}
               >
-                <Typography sx={{ fontSize: "1.5rem" }}>
+                <Box sx={{
+                  width: 52,
+                  height: 52,
+                  minWidth: 52,
+                  borderRadius: "14px",
+                  bgcolor: `${skill.color}15`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: skill.color,
+                }}>
                   {skill.icon}
-                </Typography>
-                <Typography fontSize="0.85rem" fontWeight={600}>
-                  {skill.name}
-                </Typography>
-                <Typography variant="caption">{skill.category}</Typography>
-              </Paper>
+                </Box>
+                <Box>
+                  <Typography variant="h6" fontWeight={700} color="text.primary" sx={{ mb: 0.5 }}>
+                    {skill.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {skill.desc}
+                  </Typography>
+                </Box>
+              </Box>
+            </motion.div>
+          ))}
+        </Box>
+
+        {/* Tools — Floating Pills */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <Box sx={{ textAlign: "center", mb: 5 }}>
+            <Typography variant="h5" fontWeight={700} color="text.primary" sx={{ mb: 1 }}>
+              Tools & Technologies
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              The full ecosystem I work with daily
+            </Typography>
+          </Box>
+
+          <Box sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: 1.5,
+            maxWidth: "800px",
+            mx: "auto",
+          }}>
+            {tools.map((tool, i) => (
+              <motion.div
+                key={tool}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: i * 0.03 }}
+                whileHover={{ scale: 1.08, y: -3 }}
+              >
+                <Box sx={{
+                  px: 2.5,
+                  py: 1.2,
+                  borderRadius: "12px",
+                  border: "1px solid",
+                  borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
+                  bgcolor: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)",
+                  color: "text.primary",
+                  fontWeight: 600,
+                  fontSize: "0.88rem",
+                  cursor: "default",
+                  transition: "all 0.2s ease",
+                  fontFamily: '"Outfit", sans-serif',
+                  "&:hover": {
+                    borderColor: "primary.main",
+                    bgcolor: isDark ? "rgba(59,130,246,0.1)" : "rgba(59,130,246,0.06)",
+                    color: "primary.main",
+                  },
+                }}>
+                  {tool}
+                </Box>
+              </motion.div>
             ))}
           </Box>
-        </Box>
+        </motion.div>
       </Container>
     </Box>
   );

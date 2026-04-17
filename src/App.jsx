@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Box } from '@mui/material';
@@ -6,7 +6,9 @@ import Header from './components/Header';
 import Home from './components/Home';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
+import Education from './components/Education';
 import Contact from './components/Contact';
+import Preloader from './components/Preloader';
 
 // Create theme context
 const ThemeContext = createContext();
@@ -21,6 +23,15 @@ export const useTheme = () => {
 
 function App() {
   const [mode, setMode] = useState('light');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Hide preloader after 2.5s
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const toggleColorMode = () => {
     setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
@@ -130,10 +141,12 @@ function App() {
     <ThemeContext.Provider value={{ mode, toggleColorMode }}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Box sx={{ minHeight: '100vh' }}>
+        <Preloader isLoading={loading} />
+        <Box sx={{ minHeight: '100vh', opacity: loading ? 0 : 1, transition: 'opacity 0.8s ease-in-out' }}>
           <Header />
           <Home />
           <Skills />
+          <Education />
           <Projects />
           <Contact />
         </Box>

@@ -4,191 +4,245 @@ import {
   Container,
   Typography,
   Grid,
-  Card,
-  CardContent,
-  CardActions,
   Button,
   Chip,
-  CardMedia,
+  useTheme,
 } from "@mui/material";
-import { GitHub, Article } from "@mui/icons-material";
+import { GitHub, OpenInNew, ArrowForward } from "@mui/icons-material";
+import { motion } from "framer-motion";
 
 const Projects = () => {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+
   const projects = [
     {
-      title: "FMS  Personal Finance Management",
-      description: `FMS is  personal finance management platform designed to help users track income, expenses, and savings effortlessly. 
-    
-    Users can categorize transactions, set financial goals. The platform is responsive, secure, and built with scalability in mind, making it ideal for both casual users and finance enthusiasts.`,
+      title: "FMS — Personal Finance",
+      description:
+        "Full-stack finance tracker for income, expenses, and savings. Features categorized transactions, financial goals, and responsive design.",
       github: "https://github.com/natabile/FMs",
       image:
         "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      technologies: ["React", "Node.js", "MongoDB", "Express"],
-      color: "#2196F3",
+      tech: ["React", "Node.js", "MongoDB", "Express"],
     },
     {
-      title: "Endebet – Home Rental Platform",
-      description: `Endebet is a modern home rental platform designed to simplify property searching and rental management. 
-    Users can browse listings with detailed photos, descriptions, and reviews. The platform offers map, real-time chat with property owners, booking management. 
-    It is built for scalability and user engagement, ensuring a seamless experience for renters, landlords, and agencies alike. The platform also supports notifications, wishlists, and analytics to enhance decision-making.`,
+      title: "Endebet — Home Rentals",
+      description:
+        "Modern rental platform with map search, real-time chat, booking management, wishlists, and analytics for renters and landlords.",
       github: "https://github.com/natabile/home",
       image:
         "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      technologies: ["React", "Node.js", "MongoDB", "Socket.io"],
-      color: "#2196F3",
+      tech: ["React", "Node.js", "MongoDB", "Socket.io"],
     },
     {
       title: "Tech News App",
-      description: `Tech News App is an intuitive news aggregator that collects technology news from multiple sources in real time. 
-    It provides a clean and responsive reading experience with categorized filters, bookmarking features, and search functionality. 
-    Users can personalize the news feed based on topics, get notifications for trending news, and enjoy smooth navigation across articles. 
-    The application is optimized for performance and offers mobile-friendly layouts to make reading tech news convenient anywhere.`,
+      description:
+        "Real-time news aggregator with categorized filters, personalized feeds, bookmarking, and mobile-friendly layouts.",
       github: "https://github.com/natabile/news",
       image:
         "https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      technologies: ["React", "API Integration", "Responsive Design"],
-      color: "#2196F3",
+      tech: ["React", "API Integration", "Responsive"],
     },
     {
       title: "Harone Forex",
-      description: `Harone Forex is a robust online forex exchange platform built with Frappe/ERPNext. 
-    It provides users with real-time currency rates, secure transaction management, and a full-featured dashboard to monitor foreign exchange activities. 
-    The platform supports multi-currency wallets, detailed transaction history, and reporting features for both individual and business users. 
-    Harone Forex ensures high security and reliability while offering an easy-to-use interface for managing all forex-related operations efficiently.`,
+      description:
+        "Online forex exchange built with Frappe/ERPNext. Real-time rates, secure transactions, multi-currency wallets, and reporting.",
       github: "https://www.haronforex.com/",
       image:
         "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      technologies: ["React", "Frappe", "ERPNext", "Jinja"],
-      color: "#2196F3",
-      isLineProject: true,
+      tech: ["Frappe", "ERPNext", "Jinja", "React"],
+      isLive: true,
     },
   ];
 
-  // State to track which description is expanded
-  const [expanded, setExpanded] = useState({});
-
-  const toggleExpand = (index) => {
-    setExpanded((prev) => ({ ...prev, [index]: !prev[index] }));
-  };
-
-  const truncateText = (text, limit = 15) => {
-    const words = text.split(" ");
-    if (words.length <= limit) return text;
-    return words.slice(0, limit).join(" ") + "...";
-  };
-
   return (
-    <Box sx={{ py: 10, bgcolor: "background.default" }}>
-      <Container maxWidth="xl">
-        <Box sx={{ textAlign: "center", mb: 10 }}>
-          <Typography
-            variant="h2"
-            sx={{ fontWeight: 700, color: "primary.main" }}
-          >
-            Featured Projects
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
-            A selection of my latest work and projects.
-          </Typography>
-        </Box>
+    <Box id="projects" sx={{ py: 15, bgcolor: isDark ? "rgba(30,41,59,0.15)" : "rgba(241,245,249,0.5)" }}>
+      <Container maxWidth="lg">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", mb: 8, flexWrap: "wrap", gap: 2 }}>
+            <Box>
+              <Typography
+                variant="overline"
+                sx={{ color: "primary.main", fontWeight: 700, letterSpacing: 3, display: "block", mb: 1 }}
+              >
+                Portfolio
+              </Typography>
+              <Typography variant="h2" fontWeight={800} color="text.primary">
+                Featured Work
+              </Typography>
+            </Box>
+          </Box>
+        </motion.div>
 
-        <Grid container spacing={4} justifyContent="center">
-          {projects.map((project, index) => (
-            <Grid item key={index} xs={12} sm={6} md={6}>
-              <Card
+        {/* Project Cards */}
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          {projects.map((project, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+            >
+              <Box
+                component={motion.div}
+                whileHover="hover"
                 sx={{
                   display: "flex",
-                  flexDirection: "column",
-                  borderRadius: 3,
+                  flexDirection: { xs: "column", md: i % 2 === 0 ? "row" : "row-reverse" },
+                  borderRadius: "24px",
                   overflow: "hidden",
-                  boxShadow: 3,
-                  transition: "transform 0.3s ease",
-                  "&:hover": { transform: "translateY(-8px)" },
+                  border: "1px solid",
+                  borderColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
+                  bgcolor: isDark ? "rgba(30,41,59,0.4)" : "rgba(255,255,255,0.7)",
+                  backdropFilter: "blur(10px)",
+                  transition: "all 0.4s ease",
+                  "&:hover": {
+                    borderColor: isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)",
+                    boxShadow: isDark
+                      ? "0 30px 60px rgba(0,0,0,0.4)"
+                      : "0 30px 60px rgba(0,0,0,0.08)",
+                  },
                 }}
               >
-                <CardMedia
-                  component="img"
-                  height="200"
-                  width="200"
-                  image={project.image}
-                  sx={{ objectFit: "cover" }}
-                />
-
-                <CardContent sx={{ flexGrow: 1, p: 3 }}>
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: 700,
-                      mb: 1,
-                      height: "3rem",
-                      display: "-webkit-box",
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: "vertical",
-                      overflow: "hidden",
+                {/* Image */}
+                <Box
+                  sx={{
+                    width: { xs: "100%", md: "50%" },
+                    minHeight: { xs: "250px", md: "380px" },
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
+                >
+                  <motion.div
+                    variants={{ hover: { scale: 1.06 } }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      backgroundImage: `url(${project.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
                     }}
+                  />
+                  {/* Subtle overlay */}
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      inset: 0,
+                      background: isDark
+                        ? "linear-gradient(135deg, rgba(15,23,42,0.3), transparent)"
+                        : "linear-gradient(135deg, rgba(248,250,252,0.2), transparent)",
+                    }}
+                  />
+                </Box>
+
+                {/* Content */}
+                <Box
+                  sx={{
+                    width: { xs: "100%", md: "50%" },
+                    p: { xs: 4, md: 6 },
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                  }}
+                >
+                  {/* Project number */}
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: "primary.main",
+                      fontWeight: 700,
+                      letterSpacing: 2,
+                      mb: 2,
+                      fontFamily: '"Outfit", monospace',
+                    }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </Typography>
+
+                  <Typography
+                    variant="h4"
+                    sx={{ fontWeight: 800, mb: 2, color: "text.primary", lineHeight: 1.2 }}
                   >
                     {project.title}
                   </Typography>
 
                   <Typography
-                    variant="body2"
+                    variant="body1"
                     color="text.secondary"
-                    sx={{ mb: 2 }}
+                    sx={{ mb: 4, lineHeight: 1.7 }}
                   >
-                    {expanded[index]
-                      ? project.description
-                      : truncateText(project.description, 10)}
+                    {project.description}
                   </Typography>
 
-                  {project.description.split(" ").length > 10 && (
-                    <Button
-                      size="small"
-                      onClick={() => toggleExpand(index)}
-                      sx={{ mb: 2 }}
-                    >
-                      {expanded[index] ? "See Less" : "See More"}
-                    </Button>
-                  )}
-
-                  <Box
-                    sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 2 }}
-                  >
-                    {project.technologies.map((tech, i) => (
+                  {/* Tech chips */}
+                  <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 4 }}>
+                    {project.tech.map((t, idx) => (
                       <Chip
-                        key={i}
-                        label={tech}
+                        key={idx}
+                        label={t}
                         size="small"
-                        variant="outlined"
+                        sx={{
+                          borderRadius: "8px",
+                          fontWeight: 600,
+                          fontSize: "0.78rem",
+                          bgcolor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+                          color: "text.secondary",
+                          border: "none",
+                        }}
                       />
                     ))}
                   </Box>
-                </CardContent>
 
-                <CardActions sx={{ p: 3, pt: 0 }}>
-                  <Button
-                    variant="contained"
-                    startIcon={project.isLineProject ? <Article /> : <GitHub />}
-                    href={project.github}
-                    target="_blank"
-                    sx={{
-                      marginLeft: "30%",
-                      py: 1.5,
-                      fontWeight: 600,
-                      borderRadius: 2,
-                      bgcolor: project.color,
-                      "&:hover": {
-                        bgcolor: project.color,
-                        filter: "brightness(0.9)",
-                      },
-                    }}
-                  >
-                    {project.isLineProject ? "View Live" : "View Code"}
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
+                  {/* Actions */}
+                  <Box sx={{ display: "flex", gap: 2 }}>
+                    <Button
+                      component={motion.a}
+                      whileHover={{ x: 3 }}
+                      variant="text"
+                      href={project.github}
+                      target="_blank"
+                      endIcon={project.isLive ? <OpenInNew /> : <ArrowForward />}
+                      sx={{
+                        color: "text.primary",
+                        fontWeight: 700,
+                        px: 0,
+                        "&:hover": { bgcolor: "transparent", color: "primary.main" },
+                      }}
+                    >
+                      {project.isLive ? "View Live" : "View Code"}
+                    </Button>
+                    {!project.isLive && (
+                      <Button
+                        component={motion.a}
+                        whileHover={{ x: 3 }}
+                        variant="text"
+                        href={project.github}
+                        target="_blank"
+                        startIcon={<GitHub />}
+                        sx={{
+                          color: "text.secondary",
+                          fontWeight: 600,
+                          px: 0,
+                          "&:hover": { bgcolor: "transparent", color: "text.primary" },
+                        }}
+                      >
+                        Source
+                      </Button>
+                    )}
+                  </Box>
+                </Box>
+              </Box>
+            </motion.div>
           ))}
-        </Grid>
+        </Box>
       </Container>
     </Box>
   );

@@ -12,36 +12,44 @@ import {
   ListItemText,
   useTheme as useMuiTheme,
   useMediaQuery,
-  Chip,
-  Avatar,
+  Container,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { useTheme } from '../App';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const theme = useMuiTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const { mode, toggleColorMode } = useTheme();
+  const isDark = mode === 'dark';
 
-  const menuItems = ['Home', 'Skills', 'Projects', 'Contact'];
+  const menuItems = ['Home', 'Skills', 'Education', 'Projects', 'Contact'];
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 50;
-      setScrolled(isScrolled);
+      setScrolled(window.scrollY > 30);
+
+      // Detect active section
+      const sections = menuItems.map((item) => item.toLowerCase());
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.getBoundingClientRect().top <= 200) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
 
   const scrollToSection = (section) => {
     const element = document.getElementById(section.toLowerCase());
@@ -51,217 +59,209 @@ const Header = () => {
     setMobileOpen(false);
   };
 
-  const drawer = (
-    <Box sx={{ p: 2 }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', mb: 3, p: 2 }}>
-        <Avatar
-          sx={{
-            width: 48,
-            height: 48,
-            background: 'linear-gradient(45deg, #1976d2, #42a5f5)',
-            color: 'white',
-            fontWeight: 700,
-            mr: 2,
-          }}
-        >
-          NH
-        </Avatar>
-        <Typography variant="h6" sx={{ fontWeight: 700, color: 'primary.main' }}>
-          Natnael Hailu
-        </Typography>
-      </Box>
-      <List>
-        {menuItems.map((item, index) => (
-          <ListItem 
-            button 
-            key={item} 
-            onClick={() => scrollToSection(item)}
-            sx={{ 
-              mb: 1,
-              borderRadius: 2,
-              transition: 'all 0.3s ease-in-out',
-              '&:hover': { 
-                backgroundColor: 'primary.main',
-                color: 'white',
-                transform: 'translateX(8px)',
-              } 
-            }}
-          >
-            <ListItemText 
-              primary={item} 
-              primaryTypographyProps={{
-                fontWeight: 600,
-                fontSize: '1rem',
-              }}
-            />
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-
   return (
     <>
-      <AppBar 
-        position="fixed" 
-        elevation={scrolled ? 8 : 0}
-        sx={{ 
-          backgroundColor: mode === 'light' 
-            ? scrolled 
-              ? 'rgba(255, 255, 255, 0.98)' 
-              : 'rgba(255, 255, 255, 0.95)'
-            : scrolled 
-              ? 'rgba(18, 18, 18, 0.98)' 
-              : 'rgba(18, 18, 18, 0.95)',
-          backdropFilter: 'blur(20px)',
-          borderBottom: mode === 'light' 
-            ? '1px solid rgba(0, 0, 0, 0.1)' 
-            : '1px solid rgba(255, 255, 255, 0.1)',
-          transition: 'all 0.3s ease-in-out',
+      <AppBar
+        position="fixed"
+        elevation={0}
+        sx={{
+          backgroundColor: scrolled
+            ? isDark
+              ? 'rgba(15, 23, 42, 0.85)'
+              : 'rgba(248, 250, 252, 0.85)'
+            : 'transparent',
+          backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
+          borderBottom: scrolled
+            ? `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'}`
+            : '1px solid transparent',
+          transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
       >
-        <Toolbar sx={{ minHeight: { xs: 64, md: 80 } }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
-            <Avatar
-              sx={{
-                width: { xs: 40, md: 48 },
-                height: { xs: 40, md: 48 },
-                background: 'linear-gradient(45deg, #1976d2, #42a5f5)',
-                color: 'white',
-                fontWeight: 700,
-                mr: 2,
-                boxShadow: '0 4px 16px rgba(25, 118, 210, 0.3)',
-              }}
+        <Container maxWidth="lg">
+          <Toolbar disableGutters sx={{ minHeight: { xs: 64, md: 72 } }}>
+            {/* Logo */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              style={{ flexGrow: 1, cursor: 'pointer' }}
+              onClick={() => scrollToSection('Home')}
             >
-              NH
-            </Avatar>
-            <Box>
-              <Typography 
-                variant="h6" 
-                component="div" 
-                sx={{ 
-                  color: 'primary.main',
-                  fontWeight: 700,
-                  fontSize: { xs: '1.25rem', md: '1.5rem' },
-                  lineHeight: 1,
-                }}
-              >
-                Natnael Hailu
-              </Typography>
-              <Chip
-                label="MERN  AND ERP Developer"
-                size="small"
-                sx={{
-                  backgroundColor: 'primary.main',
-                  color: 'white',
-                  fontSize: '0.7rem',
-                  height: 20,
-                  fontWeight: 600,
-                }}
-              />
-            </Box>
-          </Box>
-          
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            {/* Dark Mode Toggle */}
-            <IconButton
-              onClick={toggleColorMode}
-              color="primary"
-              sx={{ 
-                mr: 1,
-                width: 48,
-                height: 48,
-                borderRadius: 2,
-                transition: 'all 0.3s ease-in-out',
-                '&:hover': {
-                  backgroundColor: 'primary.main',
-                  color: 'white',
-                  transform: 'rotate(180deg)',
-                }
-              }}
-            >
-              {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-            </IconButton>
-            
-            {isMobile ? (
-              <IconButton
-                color="primary"
-                aria-label="open drawer"
-                edge="start"
-                onClick={handleDrawerToggle}
-                sx={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: 2,
-                  transition: 'all 0.3s ease-in-out',
-                  '&:hover': {
-                    backgroundColor: 'primary.main',
-                    color: 'white',
-                    transform: 'scale(1.1)',
-                  }
-                }}
-              >
-                <MenuIcon />
-              </IconButton>
-            ) : (
-              <Box sx={{ display: 'flex', gap: 1 }}>
-                {menuItems.map((item) => (
-                  <Button
-                    key={item}
-                    color="primary"
-                    onClick={() => scrollToSection(item)}
-                    sx={{
-                      px: 3,
-                      py: 1,
-                      borderRadius: 2,
-                      fontWeight: 600,
-                      transition: 'all 0.3s ease-in-out',
-                      '&:hover': {
-                        backgroundColor: 'primary.main',
-                        color: 'white',
-                        transform: 'translateY(-2px)',
-                        boxShadow: '0 4px 16px rgba(25, 118, 210, 0.3)',
-                      }
-                    }}
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                <Box
+                  sx={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: '10px',
+                    background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Typography
+                    sx={{ color: 'white', fontWeight: 800, fontSize: '0.9rem', lineHeight: 1 }}
                   >
-                    {item}
-                  </Button>
-                ))}
+                    N
+                  </Typography>
+                </Box>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 800,
+                    color: 'text.primary',
+                    fontSize: '1.1rem',
+                    letterSpacing: '-0.5px',
+                  }}
+                >
+                  natnael.
+                </Typography>
+              </Box>
+            </motion.div>
+
+            {/* Desktop Navigation */}
+            {!isMobile && (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                {menuItems.map((item, i) => {
+                  const isActive = activeSection === item.toLowerCase();
+                  return (
+                    <motion.div
+                      key={item}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.08 }}
+                    >
+                      <Button
+                        onClick={() => scrollToSection(item)}
+                        sx={{
+                          px: 2.5,
+                          py: 1,
+                          borderRadius: '10px',
+                          color: isActive ? 'primary.main' : 'text.secondary',
+                          fontWeight: isActive ? 700 : 500,
+                          fontSize: '0.9rem',
+                          position: 'relative',
+                          bgcolor: isActive
+                            ? isDark
+                              ? 'rgba(59,130,246,0.1)'
+                              : 'rgba(59,130,246,0.08)'
+                            : 'transparent',
+                          '&:hover': {
+                            bgcolor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)',
+                            color: 'primary.main',
+                          },
+                          transition: 'all 0.2s ease',
+                        }}
+                      >
+                        {item}
+                      </Button>
+                    </motion.div>
+                  );
+                })}
               </Box>
             )}
-          </Box>
-        </Toolbar>
+
+            {/* Actions */}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, ml: 2 }}>
+              <IconButton
+                onClick={toggleColorMode}
+                size="small"
+                sx={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: '10px',
+                  color: 'text.secondary',
+                  bgcolor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)',
+                  '&:hover': {
+                    bgcolor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)',
+                  },
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                {isDark ? <Brightness7Icon fontSize="small" /> : <Brightness4Icon fontSize="small" />}
+              </IconButton>
+
+              {isMobile && (
+                <IconButton
+                  onClick={() => setMobileOpen(true)}
+                  sx={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: '10px',
+                    color: 'text.primary',
+                    bgcolor: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)',
+                  }}
+                >
+                  <MenuIcon fontSize="small" />
+                </IconButton>
+              )}
+            </Box>
+          </Toolbar>
+        </Container>
       </AppBar>
-      
-      <Drawer
-        variant="temporary"
-        anchor="right"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true,
-        }}
-        sx={{
-          display: { xs: 'block', md: 'none' },
-          '& .MuiDrawer-paper': { 
-            boxSizing: 'border-box', 
-            width: 280,
-            background: mode === 'light' 
-              ? 'linear-gradient(135deg, #ffffff, #f8f9fa)'
-              : 'linear-gradient(135deg, #1e1e1e, #2a2a2a)',
-            color: mode === 'light' ? '#333333' : '#ffffff',
-            borderLeft: mode === 'light' 
-              ? '1px solid rgba(0,0,0,0.1)' 
-              : '1px solid rgba(255,255,255,0.1)',
-          },
-        }}
-      >
-        {drawer}
-      </Drawer>
-      
-      <Toolbar sx={{ minHeight: { xs: 64, md: 80 } }} /> {/* Spacer for fixed AppBar */}
+
+      {/* Full-screen mobile menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 1300,
+              background: isDark ? 'rgba(15,23,42,0.98)' : 'rgba(248,250,252,0.98)',
+              backdropFilter: 'blur(20px)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <IconButton
+              onClick={() => setMobileOpen(false)}
+              sx={{
+                position: 'absolute',
+                top: 16,
+                right: 16,
+                color: 'text.primary',
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+
+            {menuItems.map((item, i) => (
+              <motion.div
+                key={item}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ delay: i * 0.08, duration: 0.4 }}
+              >
+                <Button
+                  onClick={() => scrollToSection(item)}
+                  sx={{
+                    fontSize: '2rem',
+                    fontWeight: 700,
+                    color: 'text.primary',
+                    py: 2,
+                    '&:hover': { color: 'primary.main' },
+                  }}
+                >
+                  {item}
+                </Button>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Spacer */}
+      <Toolbar sx={{ minHeight: { xs: 64, md: 72 } }} />
     </>
   );
 };
 
-export default Header; 
+export default Header;
