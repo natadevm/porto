@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, Typography, Grid, Button, IconButton, TextField, useTheme } from "@mui/material";
+import { Box, Container, Typography, Grid, Button, IconButton, useTheme } from "@mui/material";
 import { Email, Phone, GitHub, LinkedIn, ArrowForward, NorthEast } from "@mui/icons-material";
 import { motion } from "framer-motion";
 
@@ -61,7 +61,7 @@ const Contact = () => {
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
         <Grid container spacing={8} alignItems="center">
-          {/* Left side — Contact Form */}
+          {/* Left side — Simple CTA */}
           <Grid item xs={12} md={6}>
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -80,13 +80,13 @@ const Contact = () => {
                 variant="h2"
                 sx={{
                   fontWeight: 800,
-                  fontSize: { xs: "3rem", sm: "4rem" },
+                  fontSize: { xs: "3.5rem", sm: "4.5rem" },
                   lineHeight: 1,
                   mb: 4,
                   color: "text.primary",
                 }}
               >
-                Let's build
+                Ready to start
                 <br />
                 <Box
                   component="span"
@@ -96,94 +96,13 @@ const Contact = () => {
                     WebkitTextFillColor: "transparent",
                   }}
                 >
-                  together.
+                  your project?
                 </Box>
               </Typography>
 
-              <Box 
-                component="form" 
-                action="https://formsubmit.co/codernathailu@gmail.com" 
-                method="POST"
-                sx={{ display: "flex", flexDirection: "column", gap: 3, maxWidth: "500px" }}
-              >
-                {/* Honeypot for spam */}
-                <input type="text" name="_honey" style={{ display: "none" }} />
-                
-                {/* Disable captcha for better UX */}
-                <input type="hidden" name="_captcha" value="false" />
-                
-                {/* Subject of the email */}
-                <input type="hidden" name="_subject" value="New Portfolio Message!" />
-
-                <TextField
-                  fullWidth
-                  required
-                  name="name"
-                  label="Your Name"
-                  variant="outlined"
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '12px',
-                      bgcolor: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)',
-                    }
-                  }}
-                />
-                
-                <TextField
-                  fullWidth
-                  required
-                  type="email"
-                  name="email"
-                  label="Your Email"
-                  variant="outlined"
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '12px',
-                      bgcolor: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)',
-                    }
-                  }}
-                />
-                
-                <TextField
-                  fullWidth
-                  required
-                  name="message"
-                  label="Your Message"
-                  multiline
-                  rows={4}
-                  variant="outlined"
-                  sx={{
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '12px',
-                      bgcolor: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)',
-                    }
-                  }}
-                />
-
-                <Button
-                  component={motion.button}
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  type="submit"
-                  variant="contained"
-                  size="large"
-                  endIcon={<ArrowForward />}
-                  sx={{
-                    background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
-                    px: 5,
-                    py: 2,
-                    fontSize: "1.05rem",
-                    borderRadius: "14px",
-                    alignSelf: "flex-start",
-                    boxShadow: "0 8px 30px rgba(59,130,246,0.35)",
-                    "&:hover": {
-                      boxShadow: "0 14px 40px rgba(139,92,246,0.4)",
-                    },
-                  }}
-                >
-                  Send Message
-                </Button>
-              </Box>
+              <Typography variant="h5" color="text.secondary" sx={{ mb: 5, maxWidth: "450px", lineHeight: 1.6, fontWeight: 500 }}>
+                I'm currently available for new opportunities. Reach out via any of these channels to get the conversation started.
+              </Typography>
             </motion.div>
           </Grid>
 
@@ -284,7 +203,6 @@ const Contact = () => {
           <Typography variant="body2" color="text.secondary" fontWeight={500}>
             © {new Date().getFullYear()} Natnael Hailu
           </Typography>
-         
         </Box>
       </Container>
     </Box>
