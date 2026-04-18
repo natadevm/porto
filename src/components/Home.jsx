@@ -347,64 +347,67 @@ const Home = () => {
             </Typography>
           </motion.div>
 
-          <Grid container spacing={3}>
+          <Box sx={{
+            display: "grid",
+            gridTemplateColumns: { xs: "1fr", sm: "repeat(2, 1fr)", md: "repeat(4, 1fr)" },
+            gap: 3,
+          }}>
             {services.map((service, i) => (
-              <Grid item xs={12} sm={6} md={3} key={i}>
-                <motion.div
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  style={{ height: "100%" }}
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                style={{ height: "100%" }}
+              >
+                <Box
+                  component={motion.div}
+                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                  sx={{
+                    p: 4,
+                    height: "100%",
+                    borderRadius: "20px",
+                    border: "1px solid",
+                    borderColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
+                    bgcolor: isDark ? "rgba(30,41,59,0.3)" : "rgba(255,255,255,0.6)",
+                    backdropFilter: "blur(10px)",
+                    transition: "all 0.3s ease",
+                    cursor: "default",
+                    "&:hover": {
+                      borderColor: isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)",
+                      boxShadow: isDark
+                        ? "0 20px 40px rgba(0,0,0,0.3)"
+                        : "0 20px 40px rgba(0,0,0,0.08)",
+                    },
+                  }}
                 >
                   <Box
-                    component={motion.div}
-                    whileHover={{ y: -8, transition: { duration: 0.3 } }}
                     sx={{
-                      p: 4,
-                      height: "100%",
-                      borderRadius: "20px",
-                      border: "1px solid",
-                      borderColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
-                      bgcolor: isDark ? "rgba(30,41,59,0.3)" : "rgba(255,255,255,0.6)",
-                      backdropFilter: "blur(10px)",
-                      transition: "all 0.3s ease",
-                      cursor: "default",
-                      "&:hover": {
-                        borderColor: isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)",
-                        boxShadow: isDark
-                          ? "0 20px 40px rgba(0,0,0,0.3)"
-                          : "0 20px 40px rgba(0,0,0,0.08)",
-                      },
+                      width: 48,
+                      height: 48,
+                      borderRadius: "14px",
+                      background: service.gradient,
+                      mb: 3,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
-                    <Box
-                      sx={{
-                        width: 48,
-                        height: 48,
-                        borderRadius: "14px",
-                        background: service.gradient,
-                        mb: 3,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Typography sx={{ color: "white", fontWeight: 800, fontSize: "1.1rem" }}>
-                        {service.title.charAt(0)}
-                      </Typography>
-                    </Box>
-                    <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}>
-                      {service.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-                      {service.desc}
+                    <Typography sx={{ color: "white", fontWeight: 800, fontSize: "1.1rem" }}>
+                      {service.title.charAt(0)}
                     </Typography>
                   </Box>
-                </motion.div>
-              </Grid>
+                  <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, color: "text.primary" }}>
+                    {service.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+                    {service.desc}
+                  </Typography>
+                </Box>
+              </motion.div>
             ))}
-          </Grid>
+          </Box>
         </Container>
       </Box>
 
