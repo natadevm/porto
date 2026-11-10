@@ -59,17 +59,6 @@ const Education = () => {
               },
             }}
           >
-            {/* Accent gradient bar */}
-            <Box
-              sx={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                height: "4px",
-                background: "linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899)",
-              }}
-            />
 
             <Box sx={{ display: "flex", alignItems: "flex-start", gap: 3 }}>
               {/* Icon */}
@@ -79,7 +68,7 @@ const Education = () => {
                   height: 56,
                   minWidth: 56,
                   borderRadius: "16px",
-                  background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
+                  bgcolor: "#3b82f6",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -100,9 +89,7 @@ const Education = () => {
                   sx={{
                     fontWeight: 600,
                     mb: 2,
-                    background: "linear-gradient(90deg, #3b82f6, #8b5cf6)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
+                    color: "primary.main",
                   }}
                 >
                   Debre Berhan University

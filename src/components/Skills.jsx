@@ -9,32 +9,28 @@ const Skills = () => {
 
   const coreSkills = [
     { name: "React.js", icon: <Web />, color: "#61DAFB", desc: "Frontend UI components & hooks" },
+    { name: "Redux", icon: <Layers />, color: "#764ABC", desc: "State management library" },
+    { name: "Tailwind CSS", icon: <Web />, color: "#06B6D4", desc: "Utility-first CSS framework" },
     { name: "Node.js", icon: <Code />, color: "#339933", desc: "Server-side runtime" },
     { name: "Express.js", icon: <Api />, color: "#F97316", desc: "RESTful API framework" },
     { name: "MongoDB", icon: <Storage />, color: "#47A248", desc: "NoSQL database solutions" },
+    { name: "MariaDB", icon: <Storage />, color: "#003545", desc: "Relational database systems" },
     { name: "Frappe/ERPNext", icon: <Business />, color: "#E11D48", desc: "Enterprise ERP systems" },
     { name: "Material-UI", icon: <Layers />, color: "#3b82f6", desc: "Design system & components" },
+    { name: "TanStack Query", icon: <Api />, color: "#FF4154", desc: "Data fetching & caching" },
+    { name: "TanStack Table", icon: <Layers />, color: "#5A67D8", desc: "Headless table library" },
+    { name: "TanStack Form", icon: <Api />, color: "#EF4444", desc: "Form state management" },
   ];
 
   const tools = [
     "JavaScript ES6+", "TypeScript", "Redux", "HTML5 & CSS3",
     "Python", "Jinja", "Mongoose", "JWT Auth",
     "Git & GitHub", "RESTful APIs", "Responsive Design",
-    "Agile", "Postman", "MariaDB", "Docker", "VS Code",
+    "Agile", "Postman", "Docker", "VS Code",
   ];
 
   return (
     <Box id="skills" sx={{ py: 15, bgcolor: "background.default", position: "relative", overflow: "hidden" }}>
-      {/* Accent line */}
-      <Box sx={{
-        position: "absolute",
-        top: 0,
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: "1px",
-        height: "80px",
-        background: `linear-gradient(to bottom, transparent, ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'})`,
-      }} />
 
       <Container maxWidth="lg">
         {/* Header */}
@@ -80,16 +76,15 @@ const Skills = () => {
                   borderRadius: "20px",
                   border: "1px solid",
                   borderColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
-                  bgcolor: isDark ? "rgba(30,41,59,0.3)" : "rgba(255,255,255,0.6)",
-                  backdropFilter: "blur(10px)",
+                  bgcolor: isDark ? "#1e293b" : "#ffffff",
                   transition: "all 0.3s ease",
                   cursor: "default",
                   display: "flex",
                   alignItems: "flex-start",
                   gap: 3,
                   "&:hover": {
-                    borderColor: `${skill.color}40`,
-                    boxShadow: `0 20px 40px ${skill.color}10`,
+                    borderColor: skill.color,
+                    boxShadow: isDark ? "0 8px 24px rgba(0,0,0,0.4)" : "0 8px 24px rgba(0,0,0,0.1)",
                   },
                 }}
               >
@@ -98,11 +93,11 @@ const Skills = () => {
                   height: 52,
                   minWidth: 52,
                   borderRadius: "14px",
-                  bgcolor: `${skill.color}15`,
+                  bgcolor: skill.color,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  color: skill.color,
+                  color: "white",
                 }}>
                   {skill.icon}
                 </Box>
@@ -158,7 +153,7 @@ const Skills = () => {
                   borderRadius: "12px",
                   border: "1px solid",
                   borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
-                  bgcolor: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)",
+                  bgcolor: isDark ? "#1e293b" : "#ffffff",
                   color: "text.primary",
                   fontWeight: 600,
                   fontSize: "0.88rem",
@@ -167,7 +162,7 @@ const Skills = () => {
                   fontFamily: '"Outfit", sans-serif',
                   "&:hover": {
                     borderColor: "primary.main",
-                    bgcolor: isDark ? "rgba(59,130,246,0.1)" : "rgba(59,130,246,0.06)",
+                    bgcolor: isDark ? "#334155" : "#f1f5f9",
                     color: "primary.main",
                   },
                 }}>

@@ -23,12 +23,6 @@ const Contact = () => {
     {
       icon: <GitHub />,
       title: "GitHub",
-      value: "natabile",
-      href: "https://github.com/natabile",
-    },
-    {
-      icon: <GitHub />,
-      title: "GitHub (Alt)",
       value: "natadevm",
       href: "https://github.com/natadevm",
     },
@@ -42,23 +36,6 @@ const Contact = () => {
 
   return (
     <Box id="contact" sx={{ py: 15, bgcolor: "background.default", position: "relative", overflow: "hidden" }}>
-      {/* Background accent */}
-      <motion.div
-        animate={{ scale: [1, 1.3, 1], opacity: [0.05, 0.1, 0.05] }}
-        transition={{ duration: 12, repeat: Infinity }}
-        style={{
-          position: "absolute",
-          bottom: "-200px",
-          right: "-200px",
-          width: "600px",
-          height: "600px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(139,92,246,0.15), transparent 70%)",
-          filter: "blur(80px)",
-          pointerEvents: "none",
-        }}
-      />
-
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
         <Grid container spacing={8} alignItems="center">
           {/* Left side — Simple CTA */}
@@ -91,9 +68,7 @@ const Contact = () => {
                 <Box
                   component="span"
                   sx={{
-                    background: "linear-gradient(90deg, #3b82f6, #8b5cf6)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
+                    color: "primary.main",
                   }}
                 >
                   your project?

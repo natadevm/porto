@@ -20,7 +20,7 @@ const Projects = () => {
       title: "FMS — Personal Finance",
       description:
         "Full-stack finance tracker for income, expenses, and savings. Features categorized transactions, financial goals, and responsive design.",
-      github: "https://github.com/natabile/FMs",
+      github: "https://github.com/natadevm/FMs",
       image:
         "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
       tech: ["React", "Node.js", "MongoDB", "Express"],
@@ -29,7 +29,7 @@ const Projects = () => {
       title: "Endebet — Home Rentals",
       description:
         "Modern rental platform with map search, real-time chat, booking management, wishlists, and analytics for renters and landlords.",
-      github: "https://github.com/natabile/home",
+      github: "https://github.com/natadevm/home",
       image:
         "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
       tech: ["React", "Node.js", "MongoDB", "Socket.io"],
@@ -38,7 +38,7 @@ const Projects = () => {
       title: "Tech News App",
       description:
         "Real-time news aggregator with categorized filters, personalized feeds, bookmarking, and mobile-friendly layouts.",
-      github: "https://github.com/natabile/news",
+      github: "https://github.com/natadevm/news",
       image:
         "https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
       tech: ["React", "API Integration", "Responsive"],
@@ -129,16 +129,6 @@ const Projects = () => {
                       backgroundImage: `url(${project.image})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
-                    }}
-                  />
-                  {/* Subtle overlay */}
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      inset: 0,
-                      background: isDark
-                        ? "linear-gradient(135deg, rgba(15,23,42,0.3), transparent)"
-                        : "linear-gradient(135deg, rgba(248,250,252,0.2), transparent)",
                     }}
                   />
                 </Box>

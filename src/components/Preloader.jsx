@@ -22,34 +22,7 @@ const Preloader = ({ isLoading }) => {
             overflow: "hidden",
           }}
         >
-          {/* Background grid pattern */}
-          <Box
-            sx={{
-              position: "absolute",
-              inset: 0,
-              backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)`,
-              backgroundSize: "60px 60px",
-              pointerEvents: "none",
-            }}
-          />
 
-          {/* Animated gradient orb */}
-          <motion.div
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
-            style={{
-              position: "absolute",
-              width: "400px",
-              height: "400px",
-              borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(59,130,246,0.15), transparent 70%)",
-              filter: "blur(60px)",
-            }}
-          />
 
           {/* Logo mark */}
           <motion.div
@@ -62,7 +35,7 @@ const Preloader = ({ isLoading }) => {
                 width: 80,
                 height: 80,
                 borderRadius: "20px",
-                background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
+                bgcolor: "#3b82f6",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -111,9 +84,7 @@ const Preloader = ({ isLoading }) => {
           >
             <Typography
               sx={{
-                background: "linear-gradient(90deg, #3b82f6, #8b5cf6)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
+                color: "primary.main",
                 fontWeight: 600,
                 fontSize: "0.9rem",
                 letterSpacing: 2,
@@ -143,7 +114,7 @@ const Preloader = ({ isLoading }) => {
               style={{
                 height: "100%",
                 borderRadius: "10px",
-                background: "linear-gradient(90deg, #3b82f6, #8b5cf6)",
+                bgcolor: "#3b82f6",
               }}
             />
           </Box>

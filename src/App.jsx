@@ -22,7 +22,7 @@ export const useTheme = () => {
 };
 
 function App() {
-  const [mode, setMode] = useState('light');
+  const [mode, setMode] = useState('dark');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -142,7 +142,22 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Preloader isLoading={loading} />
-        <Box sx={{ minHeight: '100vh', opacity: loading ? 0 : 1, transition: 'opacity 0.8s ease-in-out' }}>
+        <Box sx={{ minHeight: '100vh', opacity: loading ? 0 : 1, transition: 'opacity 0.8s ease-in-out', position: 'relative' }}>
+          {/* Grid pattern overlay */}
+          <Box
+            sx={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: -1,
+              backgroundImage: mode === 'dark'
+                ? `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                   linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`
+                : `linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+                   linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)`,
+              backgroundSize: '50px 50px',
+              pointerEvents: 'none',
+            }}
+          />
           <Header />
           <Home />
           <Skills />

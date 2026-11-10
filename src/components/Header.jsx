@@ -93,7 +93,7 @@ const Header = () => {
                     width: 36,
                     height: 36,
                     borderRadius: '10px',
-                    background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+                    bgcolor: 'primary.main',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',

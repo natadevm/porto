@@ -49,10 +49,10 @@ const Home = () => {
 
 
   const services = [
-    { title: "Frontend", desc: "React, MUI, responsive interfaces", gradient: "linear-gradient(135deg, #3b82f6, #06b6d4)" },
-    { title: "Backend", desc: "Node.js, Express, RESTful APIs", gradient: "linear-gradient(135deg, #10b981, #34d399)" },
-    { title: "Database", desc: "MongoDB, Mongoose, data modeling", gradient: "linear-gradient(135deg, #f59e0b, #fbbf24)" },
-    { title: "ERP", desc: "Frappe, ERPNext, Jinja templates", gradient: "linear-gradient(135deg, #ef4444, #f97316)" },
+    { title: "Frontend", desc: "React, MUI, responsive interfaces", color: "#3b82f6" },
+    { title: "Backend", desc: "Node.js, Express, RESTful APIs", color: "#10b981" },
+    { title: "Database", desc: "MongoDB, Mongoose, data modeling", color: "#f59e0b" },
+    { title: "ERP", desc: "Frappe, ERPNext, Jinja templates", color: "#ef4444" },
   ];
 
   return (
@@ -69,65 +69,7 @@ const Home = () => {
           bgcolor: "background.default",
         }}
       >
-        {/* Animated gradient orbs */}
-        <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          style={{
-            position: "absolute",
-            top: "-20%",
-            left: "-10%",
-            width: "600px",
-            height: "600px",
-            borderRadius: "50%",
-            background: isDark
-              ? "radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%)",
-            filter: "blur(60px)",
-            pointerEvents: "none",
-          }}
-        />
-        <motion.div
-          animate={{
-            x: [0, -80, 0],
-            y: [0, 80, 0],
-            scale: [1, 1.3, 1],
-          }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          style={{
-            position: "absolute",
-            bottom: "-20%",
-            right: "-10%",
-            width: "500px",
-            height: "500px",
-            borderRadius: "50%",
-            background: isDark
-              ? "radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)"
-              : "radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%)",
-            filter: "blur(60px)",
-            pointerEvents: "none",
-          }}
-        />
 
-        {/* Grid pattern overlay */}
-        <Box
-          sx={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: isDark
-              ? `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                 linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)`
-              : `linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
-                 linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-            pointerEvents: "none",
-            zIndex: 0,
-          }}
-        />
 
         <motion.div style={{ y: heroY, opacity: heroOpacity, position: "relative", zIndex: 1, width: "100%" }}>
           <Container maxWidth="lg">
@@ -163,11 +105,7 @@ const Home = () => {
                       sx={{
                         mb: 3,
                         fontWeight: 500,
-                        background: "linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundSize: "200% 200%",
-                        animation: "gradientShift 4s ease infinite",
+                        color: "primary.main",
                       }}
                     >
                       MERN Stack Developer & ERP Specialist
@@ -212,14 +150,13 @@ const Home = () => {
                         endIcon={<ArrowForward />}
                         href="#projects"
                         sx={{
-                          background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
                           px: 5,
                           py: 2,
                           fontSize: "1rem",
                           borderRadius: "14px",
                           boxShadow: "0 8px 30px rgba(59,130,246,0.35)",
                           "&:hover": {
-                            boxShadow: "0 12px 40px rgba(139,92,246,0.4)",
+                            boxShadow: "0 12px 40px rgba(59,130,246,0.45)",
                           },
                         }}
                       >
@@ -232,7 +169,7 @@ const Home = () => {
                         variant="outlined"
                         size="large"
                         startIcon={<GitHub />}
-                        href="https://github.com/natabile"
+                        href="https://github.com/natadevm"
                         target="_blank"
                         sx={{
                           px: 5,
@@ -270,27 +207,14 @@ const Home = () => {
                       height: { xs: 280, sm: 340, md: 400 },
                     }}
                   >
-                    {/* Glow behind image */}
+                    {/* Light blue background for image */}
                     <Box
                       sx={{
                         position: "absolute",
-                        inset: "-20px",
+                        inset: 0,
                         borderRadius: "50%",
-                        background: "linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.2))",
-                        filter: "blur(40px)",
+                        bgcolor: "#60a5fa",
                         zIndex: 0,
-                      }}
-                    />
-                    {/* Decorative ring */}
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        inset: "-8px",
-                        borderRadius: "50%",
-                        background: "linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6)",
-                        backgroundSize: "400% 400%",
-                        animation: "gradientShift 6s ease infinite",
-                        zIndex: 1,
                       }}
                     />
                     {/* Image container */}
@@ -301,9 +225,8 @@ const Home = () => {
                         height: "100%",
                         borderRadius: "50%",
                         overflow: "hidden",
-                        zIndex: 2,
-                        border: "4px solid",
-                        borderColor: "background.default",
+                        border: "4px solid rgba(255,255,255,0.2)",
+                        zIndex: 1,
                       }}
                     >
                       <Box
@@ -387,7 +310,7 @@ const Home = () => {
                       width: 48,
                       height: 48,
                       borderRadius: "14px",
-                      background: service.gradient,
+                      bgcolor: service.color,
                       mb: 3,
                       display: "flex",
                       alignItems: "center",
@@ -411,16 +334,6 @@ const Home = () => {
         </Container>
       </Box>
 
-      {/* Global animations */}
-      <style>
-        {`
-          @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-        `}
-      </style>
     </Box>
   );
 };
